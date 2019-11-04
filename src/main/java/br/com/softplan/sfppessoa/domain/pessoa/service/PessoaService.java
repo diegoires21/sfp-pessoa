@@ -6,6 +6,7 @@ import br.com.softplan.sfppessoa.domain.pessoa.repository.PessoaRepository;
 import br.com.softplan.sfppessoa.exception.BadRequest;
 import br.com.softplan.sfppessoa.exception.HttpException;
 import br.com.softplan.sfppessoa.exception.NotFoundException;
+import br.com.softplan.sfppessoa.validadores.ValidadorCpf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class PessoaService extends StandarService<Pessoa,Long, PessoaRepository> {
     private static final String PESSOA_NOT_FOUND="Pessoa não encontrada";
     private static final String PESSOA_EXISTS="CPF já cadastrado.";
+    private static  final ValidadorCpf validadorCpf = new ValidadorCpf();
     @Autowired
     public PessoaService(PessoaRepository repository) {
         super(repository);
@@ -26,6 +28,7 @@ public class PessoaService extends StandarService<Pessoa,Long, PessoaRepository>
         if(pessoa != null){
             throw new BadRequest(PESSOA_EXISTS);
         }
+        validadorCpf.validar(domain.getCpf());
     }
 
     public Pessoa findByCpf(String cpf) throws NotFoundException {
