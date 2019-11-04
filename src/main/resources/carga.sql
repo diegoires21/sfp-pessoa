@@ -1,0 +1,1 @@
+insert into pais(id,nome,nascionalidade) values(1,'Brasil','Brasileiro');

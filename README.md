@@ -1,2 +1,3 @@
 # sfp-pessoa
-Back end
+Back end 
+Projeto usa maven e esta conectando no banco de dados postgres
